@@ -113,4 +113,13 @@
   .columns-category > div:nth-child(even) > div:not(.columns-category-img-col) {
     order: 0;
   }
+
+  /* image-right variant: force image to the right column */
+  .columns-category.image-right > div > .columns-category-img-col {
+    order: 2;
+  }
+
+  .columns-category.image-right > div > div:not(.columns-category-img-col) {
+    order: 1;
+  }
 }

@@ -76,4 +76,14 @@
     grid-template-columns: 255px 255px;
     justify-content: end;
   }
+
+  /* left variant: align cards under a left-side text column */
+  .cards-coverage.left {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .cards-coverage.left > ul {
+    justify-content: start;
+  }
 }
