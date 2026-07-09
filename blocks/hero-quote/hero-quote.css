@@ -47,10 +47,15 @@
 }
 
 /* lifestyle variant: full-size image fills the right column */
-.hero-quote.lifestyle > div:first-child picture,
+.hero-quote.lifestyle > div:first-child picture {
+  display: block;
+  width: 100%;
+}
+
 .hero-quote.lifestyle > div:first-child img {
   width: 100%;
   height: auto;
+  aspect-ratio: 845 / 388; /* natural image dimensions — ~2.18:1 landscape */
   object-fit: cover;
   border-radius: 8px;
 }
@@ -72,7 +77,7 @@
   font-family: var(--heading-font-family);
   font-weight: 600;
   font-size: 28px;
-  line-height: 28px;
+  line-height: 1.1;
   color: #403c3c;
   text-align: left;
 }
@@ -84,7 +89,7 @@
 
 /* Intro copy — body font 400, brand text color #212121 */
 .hero-quote p {
-  margin: 16px 0 24px;
+  margin: 16px 0 0;
   font-family: var(--body-font-family);
   font-weight: 400;
   font-size: 16px;
@@ -97,11 +102,51 @@
   font-size: 0.7em;
 }
 
+/* Quote form — ZIP input + Start a quote button */
+.hero-quote-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.hero-quote-zip {
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-family: var(--body-font-family);
+  border-radius: 2px;
+  min-width: 160px;
+  flex: 1 1 160px;
+  outline: none;
+}
+
+.hero-quote-zip:focus {
+  border-color: #403c3c;
+}
+
+.hero-quote-submit {
+  background: var(--brand-red);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-family: var(--body-font-family);
+  font-weight: 700;
+  border-radius: 2.4em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hero-quote-submit:hover {
+  background: var(--brand-red-dark);
+}
+
 /* Tablet — source bumps h1 to 39px / intro to 18px around 780px */
 @media (width >= 768px) {
   .hero-quote h1 {
     font-size: var(--heading-size-xxl); /* 39px */
-    line-height: 39px;
+    line-height: 1.05;
   }
 
   .hero-quote p {

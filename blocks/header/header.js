@@ -1,17 +1,8 @@
-// State Farm header — content-first, generic. Reads nav.plain.html and builds
-// a brand row, primary nav, utility links, a search toggle, and a mobile menu.
-
-function wrapImageLinks(section) {
-  // no-op hook kept for parity; images already anchored in fragment
-  return section;
-}
-
 export default async function decorate(block) {
-  // Resolve nav fragment path (localhost/aem up first, then DA/EDS production).
   const navMeta = block.querySelector('a[href]')?.getAttribute('href');
   const navPath = navMeta || '/nav';
 
-  let resp = await fetch(`${navPath}.plain.html`);
+  const resp = await fetch(`${navPath}.plain.html`);
   if (!resp.ok) return;
 
   const html = await resp.text();
@@ -19,25 +10,37 @@ export default async function decorate(block) {
   tmp.innerHTML = html;
 
   const sections = [...tmp.children];
-  const [brandSection, primarySection, utilitySection] = sections;
+  const [brandSection, primarySection, utilitySection, loginSection] = sections;
 
+  // --- Utility bar (grey strip, full-width, above main nav) ---
+  const utilityBar = document.createElement('div');
+  utilityBar.className = 'nav-utility-bar';
+
+  const searchBtn = document.createElement('button');
+  searchBtn.className = 'nav-search';
+  searchBtn.setAttribute('aria-label', 'Search');
+  searchBtn.textContent = 'Search';
+  utilityBar.append(searchBtn);
+
+  if (utilitySection) {
+    const list = utilitySection.querySelector('ul');
+    if (list) utilityBar.append(list);
+  }
+
+  // --- Main nav ---
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Main navigation');
 
-  // --- Brand (logo) ---
   const brand = document.createElement('div');
   brand.className = 'nav-brand';
   if (brandSection) brand.append(...brandSection.childNodes);
-  wrapImageLinks(brand);
 
-  // --- Hamburger toggle (mobile) ---
   const hamburger = document.createElement('button');
   hamburger.className = 'nav-hamburger';
   hamburger.setAttribute('aria-label', 'Open navigation');
   hamburger.setAttribute('aria-expanded', 'false');
   hamburger.innerHTML = '<span></span><span></span><span></span>';
 
-  // --- Primary nav ---
   const primary = document.createElement('div');
   primary.className = 'nav-primary';
   if (primarySection) {
@@ -45,26 +48,18 @@ export default async function decorate(block) {
     if (list) primary.append(list);
   }
 
-  // --- Utility (login/help/locale) + search ---
-  const tools = document.createElement('div');
-  tools.className = 'nav-tools';
-
-  const search = document.createElement('button');
-  search.className = 'nav-search';
-  search.setAttribute('aria-label', 'Search');
-  search.textContent = 'Search';
-  tools.append(search);
-
-  if (utilitySection) {
-    const list = utilitySection.querySelector('ul');
-    if (list) tools.append(list);
+  const login = document.createElement('div');
+  login.className = 'nav-login';
+  if (loginSection) {
+    const list = loginSection.querySelector('ul');
+    if (list) login.append(list);
   }
 
-  nav.append(brand, hamburger, primary, tools);
+  nav.append(brand, hamburger, primary, login);
   block.textContent = '';
-  block.append(nav);
+  block.append(utilityBar, nav);
 
-  // --- Behavior: mobile toggle ---
+  // --- Mobile toggle ---
   const closeMenu = () => {
     nav.classList.remove('nav-open');
     hamburger.setAttribute('aria-expanded', 'false');
@@ -76,7 +71,6 @@ export default async function decorate(block) {
     hamburger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
   });
 
-  // Reset mobile state when resizing up to desktop
   const desktop = window.matchMedia('(min-width: 900px)');
   const onChange = () => { if (desktop.matches) closeMenu(); };
   if (desktop.addEventListener) desktop.addEventListener('change', onChange);

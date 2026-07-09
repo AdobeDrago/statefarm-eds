@@ -83,7 +83,32 @@ main .columns-agent-cta a.button:any-link:focus,
 
 .columns-agent-cta img {
   border-radius: 0;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- ZIP form --- */
+.columns-agent-cta-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.columns-agent-cta-zip {
+  background-color: #fff;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 2px;
+  padding: 10px 14px;
+  font-size: 15px;
+  min-width: 160px;
+  flex: 1 1 160px;
+}
+
+.columns-agent-cta-zip::placeholder {
+  color: rgb(0 0 0 / 50%);
 }
 
 /* --- Desktop: two-column layout, photo revealed and bottom-aligned --- */
@@ -99,6 +124,7 @@ main .columns-agent-cta a.button:any-link:focus,
     flex: 1 1 50%;
     max-width: 50%;
     padding: 0 15px 0 48px;
+    align-self: center; /* vertically center text in left column */
   }
 
   .columns-agent-cta h3 {
@@ -107,8 +133,18 @@ main .columns-agent-cta a.button:any-link:focus,
 
   .columns-agent-cta .columns-agent-cta-img-col {
     display: block;
-    flex: 0 0 auto;
-    max-width: 445px;
-    align-self: flex-end;
+    flex: 1 1 50%;
+    max-width: 50%;
+    overflow: hidden; /* clip zoomed photo */
+    align-self: stretch; /* fill the full panel height so cover fills it */
+  }
+
+  .columns-agent-cta .columns-agent-cta-img-col picture {
+    display: block;
+    height: 100%;
+  }
+
+  .columns-agent-cta .columns-agent-cta-img-col img {
+    height: 100%;
   }
 }
