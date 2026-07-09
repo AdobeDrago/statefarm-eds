@@ -1,0 +1,41 @@
+{
+  "variantName": "cards-article",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-09T14:05:53.312Z",
+  "sourceContext": {
+    "originUrl": "https://www.statefarm.com/insurance",
+    "originPage": "insurance category hub",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "article-grid",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "thumbnail image + linked title",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "Simple Insights / article/blog teaser grids (image + linked title)",
+      "related-content card rows with thumbnails"
+    ],
+    "notSuitableFor": [
+      "text-only link grids (use cards-coverage)",
+      "cards requiring long body descriptions and CTAs"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/insurance",
+      "/insurance/auto",
+      "/insurance/homeowners"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-07-09T14:20:00.000Z"
+  }
+}

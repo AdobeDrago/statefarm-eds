@@ -1,0 +1,41 @@
+{
+  "variantName": "hero-quote",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-07-09T14:05:53.312Z",
+  "sourceContext": {
+    "originUrl": "https://www.statefarm.com/insurance",
+    "originPage": "insurance category hub",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "quote-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + intro + quote form + image",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "landing/hub pages with a top-of-page quote or lead form",
+      "product intro pages"
+    ],
+    "notSuitableFor": [
+      "text-only headers without imagery",
+      "interior pages needing compact headers"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/insurance",
+      "/insurance/auto",
+      "/insurance/homeowners"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-07-09T14:20:00.000Z"
+  }
+}

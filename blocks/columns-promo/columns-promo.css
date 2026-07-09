@@ -1,0 +1,41 @@
+.columns-promo > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-promo img {
+  width: 100%;
+}
+
+.columns-promo > div > div {
+  order: 1;
+}
+
+.columns-promo > div > .columns-promo-img-col {
+  order: 0;
+}
+
+.columns-promo > div > .columns-promo-img-col img {
+  display: block;
+}
+
+/* Partner promo: light background, logo + heading + copy + secondary button */
+.columns-promo .button-container a.button,
+.columns-promo a.button {
+  background-color: transparent;
+  border: 2px solid var(--text-color, #1a1a1a);
+  color: var(--text-color, #1a1a1a);
+}
+
+@media (width >= 900px) {
+  .columns-promo > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns-promo > div > div {
+    flex: 1;
+    order: unset;
+  }
+}

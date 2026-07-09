@@ -1,0 +1,114 @@
+/*
+ * columns-agent-cta -- State Farm red "Find an agent" CTA panel.
+ * Text (heading + copy + form) on the left, agent photo bottom-flush on the right.
+ * White text on brand-red background. Values extracted from source computed styles:
+ * https://www.statefarm.com/insurance #find-agent .findAgentStyles_color_container__vEsF5
+ */
+
+.columns-agent-cta {
+  background-color: var(--brand-red); /* #d62311 (rgb(214,35,17)) */
+  color: #fff;
+  border-radius: 5px;
+  overflow: hidden; /* keep bottom-flush photo inside rounded corners */
+}
+
+/* --- Row: single column on mobile --- */
+.columns-agent-cta > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Text column --- */
+.columns-agent-cta > div > div {
+  padding: 0 24px;
+}
+
+.columns-agent-cta h3 {
+  font-size: 31px;
+  font-weight: 500;
+  line-height: 31px;
+  color: #fff;
+  margin: 48px 0 8px; /* sm top margin; grows to 64px at desktop */
+}
+
+.columns-agent-cta p {
+  font-size: 19px;
+  line-height: 26px;
+  color: #fff;
+  margin: 16px 0 32px;
+}
+
+/* white text for any authored links / other headings */
+.columns-agent-cta a,
+.columns-agent-cta h1,
+.columns-agent-cta h2,
+.columns-agent-cta h4,
+.columns-agent-cta h5,
+.columns-agent-cta h6 {
+  color: #fff;
+}
+
+/* --- Button: white pill with red text (overrides global brand-red button) --- */
+main .columns-agent-cta a.button:any-link,
+.columns-agent-cta button {
+  background-color: #fff;
+  color: var(--brand-red);
+  border: 1px solid var(--brand-red);
+  border-radius: 28px;
+  padding: 0 48px;
+  min-height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+main .columns-agent-cta a.button:any-link:hover,
+main .columns-agent-cta a.button:any-link:focus,
+.columns-agent-cta button:hover,
+.columns-agent-cta button:focus {
+  background-color: #f5f5f5;
+  color: var(--brand-red);
+}
+
+/* --- Image (agent photo): bottom-flush, hidden on mobile like source --- */
+.columns-agent-cta .columns-agent-cta-img-col {
+  padding: 0;
+  display: none; /* source hides photo below md breakpoint */
+}
+
+.columns-agent-cta .columns-agent-cta-img-col picture,
+.columns-agent-cta .columns-agent-cta-img-col img {
+  display: block;
+}
+
+.columns-agent-cta img {
+  border-radius: 0;
+  object-fit: contain;
+}
+
+/* --- Desktop: two-column layout, photo revealed and bottom-aligned --- */
+@media (width >= 900px) {
+  .columns-agent-cta > div {
+    flex-direction: row;
+    align-items: flex-end; /* photo flush to bottom of red panel */
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .columns-agent-cta > div > div {
+    flex: 1 1 50%;
+    max-width: 50%;
+    padding: 0 15px 0 48px;
+  }
+
+  .columns-agent-cta h3 {
+    margin-top: 64px;
+  }
+
+  .columns-agent-cta .columns-agent-cta-img-col {
+    display: block;
+    flex: 0 0 auto;
+    max-width: 445px;
+    align-self: flex-end;
+  }
+}

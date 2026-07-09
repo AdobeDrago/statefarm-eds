@@ -1,0 +1,182 @@
+@import url('brand.css');
+
+/*
+ * State Farm EDS — site-wide styles
+ * Brand tokens live in brand.css (imported above).
+ */
+
+:root {
+  /* fallback / non-brand tokens */
+  --light-color: #f5f5f5;
+  --dark-color: #212121;
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+
+  --nav-height: 65px;
+}
+
+/* fallback fonts to reduce CLS while brand font loads */
+@font-face {
+  font-family: 'arial-fallback';
+  size-adjust: 100%;
+  src: local('Arial');
+}
+
+body {
+  display: none;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+body.appear {
+  display: block;
+}
+
+header {
+  height: var(--nav-height);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-color);
+  margin-top: 0.8em;
+  margin-bottom: 0.25em;
+  scroll-margin: calc(var(--nav-height) + 1em);
+}
+
+h1 { font-size: var(--heading-size-xxl); }
+h2 { font-size: var(--heading-size-xl); }
+h3 { font-size: var(--heading-size-l); }
+h4 { font-size: var(--heading-size-m); }
+h5 { font-size: var(--heading-size-s); }
+h6 { font-size: var(--heading-size-xs); }
+
+p, dl, ol, ul, pre, blockquote {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+/* Default content links */
+a:any-link {
+  color: var(--link-color);
+  text-decoration: underline;
+  overflow-wrap: break-word;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+/* EDS button reset + variants */
+main .button-container {
+  display: inline;
+}
+
+main a.button:any-link,
+button {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  margin: 12px 0;
+  border: 2px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.5em 1.5em;
+  font-family: var(--body-font-family);
+  font-size: inherit;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--brand-red);
+  color: #fff;
+}
+
+main a.button:hover,
+main a.button:focus,
+button:hover,
+button:focus {
+  background-color: var(--brand-red-dark);
+  color: #fff;
+}
+
+main a.button.secondary,
+button.secondary {
+  background-color: #fff;
+  color: var(--brand-red);
+  border-color: var(--brand-red);
+}
+
+main a.button.secondary:hover,
+button.secondary:hover {
+  background-color: var(--brand-red);
+  color: #fff;
+}
+
+main img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+/* Sections */
+main .section {
+  padding: 32px 16px;
+}
+
+main .section > div {
+  max-width: var(--content-max-width);
+  margin: auto;
+}
+
+main .section.light,
+main .section.grey {
+  background-color: var(--section-light-bg);
+}
+
+main .section.dark {
+  background-color: var(--section-dark-bg);
+  color: #fff;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3,
+main .section.dark h4,
+main .section.dark h5,
+main .section.dark h6 {
+  color: #fff;
+}
+
+/* State Farm red accent section (find-agent / bundle CTA backgrounds) */
+main .section.accent {
+  background-color: var(--brand-red);
+  color: #fff;
+}
+
+main .section.accent h1,
+main .section.accent h2,
+main .section.accent h3,
+main .section.accent h4,
+main .section.accent h5,
+main .section.accent h6 {
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  main .section {
+    padding: 48px 32px;
+  }
+}

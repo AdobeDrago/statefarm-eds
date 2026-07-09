@@ -1,0 +1,73 @@
+/*
+ * Block: cards-coverage
+ * Coverage link grid: text-only cards (H5 title + short paragraph with a linked
+ * coverage phrase). No images.
+ * Values extracted from source computed styles:
+ *   https://www.statefarm.com/insurance  (.general_grid-wrapper__bjQyF)
+ * Decorated DOM: .cards-coverage > ul > li > div.cards-coverage-card-body
+ */
+
+/* Grid: mobile-first single column, multi-column from 900px.
+   Source uses 255px columns with a 30px column gap; auto-fill lets the grid fill
+   available width (source nested it in a 2-up layout; here it can span full width).
+   Row spacing is carried by the paragraph margin-bottom (source has no grid row-gap). */
+.cards-coverage > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 30px;
+  row-gap: 0;
+}
+
+.cards-coverage > ul > li {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+}
+
+.cards-coverage .cards-coverage-card-body {
+  margin: 0;
+}
+
+/* Title */
+.cards-coverage .cards-coverage-card-body h5,
+.cards-coverage .cards-coverage-card-body h3,
+.cards-coverage .cards-coverage-card-body h4 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #403c3c;
+}
+
+/* Coverage description */
+.cards-coverage .cards-coverage-card-body p {
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--text-color);
+}
+
+/* Coverage link -- brand red, no underline until hover */
+.cards-coverage .cards-coverage-card-body a:any-link {
+  color: var(--link-color);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.cards-coverage .cards-coverage-card-body a:hover,
+.cards-coverage .cards-coverage-card-body a:focus {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .cards-coverage > ul {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 255px));
+  }
+}
