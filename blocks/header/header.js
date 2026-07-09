@@ -13,14 +13,9 @@ export default async function decorate(block) {
   const [brandSection, primarySection, utilitySection, loginSection] = sections;
 
   // --- Utility bar (grey strip, full-width, above main nav) ---
+  // Search is NOT in the utility bar — it lives in the main nav (hardcoded)
   const utilityBar = document.createElement('div');
   utilityBar.className = 'nav-utility-bar';
-
-  const searchBtn = document.createElement('button');
-  searchBtn.className = 'nav-search';
-  searchBtn.setAttribute('aria-label', 'Search');
-  searchBtn.textContent = 'Search';
-  utilityBar.append(searchBtn);
 
   if (utilitySection) {
     const list = utilitySection.querySelector('ul');
@@ -48,6 +43,13 @@ export default async function decorate(block) {
     if (list) primary.append(list);
   }
 
+  // --- Search button (hardcoded, placed between primary links and login) ---
+  const searchBtn = document.createElement('button');
+  searchBtn.className = 'nav-search';
+  searchBtn.setAttribute('aria-label', 'Search');
+  searchBtn.setAttribute('aria-expanded', 'false');
+  searchBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`;
+
   const login = document.createElement('div');
   login.className = 'nav-login';
   if (loginSection) {
@@ -55,9 +57,54 @@ export default async function decorate(block) {
     if (list) login.append(list);
   }
 
-  nav.append(brand, hamburger, primary, login);
+  nav.append(brand, hamburger, primary, searchBtn, login);
+
+  // --- Search pane (full-width, appended to .header outside <nav>) ---
+  const searchPane = document.createElement('div');
+  searchPane.className = 'nav-search-pane';
+  searchPane.setAttribute('role', 'search');
+  searchPane.innerHTML = `
+    <form class="nav-search-form" action="/search" method="get">
+      <input type="search" name="q" class="nav-search-input" placeholder="Search statefarm.com" autocomplete="off" aria-label="Search statefarm.com">
+      <button type="submit" class="nav-search-submit" aria-label="Submit search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </form>
+    <button class="nav-search-close" aria-label="Close search">&times;</button>
+  `;
+
   block.textContent = '';
-  block.append(utilityBar, nav);
+  block.append(utilityBar, nav, searchPane);
+
+  // --- Search pane toggle logic ---
+  const searchInput = searchPane.querySelector('.nav-search-input');
+  const searchClose = searchPane.querySelector('.nav-search-close');
+
+  const openSearch = () => {
+    searchPane.classList.add('is-open');
+    searchBtn.setAttribute('aria-expanded', 'true');
+    searchInput.focus();
+  };
+
+  const closeSearch = () => {
+    searchPane.classList.remove('is-open');
+    searchBtn.setAttribute('aria-expanded', 'false');
+  };
+
+  searchBtn.addEventListener('click', () => {
+    const isOpen = searchPane.classList.contains('is-open');
+    if (isOpen) closeSearch();
+    else openSearch();
+  });
+
+  searchClose.addEventListener('click', closeSearch);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && searchPane.classList.contains('is-open')) {
+      closeSearch();
+      searchBtn.focus();
+    }
+  });
 
   // --- Mobile toggle ---
   const closeMenu = () => {
