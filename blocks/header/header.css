@@ -79,34 +79,34 @@ header .header .nav-search:hover {
 
 /* ===== Search pane — full-width white panel between utility bar and nav ===== */
 header .header .nav-search-pane {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  /* close button is position:absolute — only form is a grid item */
+  position: relative;
+  display: grid;
+  grid-template-rows: 0fr;
   width: 100%;
   background-color: #fff;
   border-bottom: 1px solid #e4e3e3;
   padding: 0 max(16px, calc((100% - var(--content-max-width, 1200px)) / 2 + 16px));
   box-sizing: border-box;
-  /* roll-down animation: starts collapsed, expands to full height */
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  transition: grid-template-rows 0.3s ease-out;
 }
 
 header .header .nav-search-pane.is-open {
-  max-height: 120px; /* larger than the 88px content height to allow breathing room */
+  grid-template-rows: 1fr;
 }
 
-/* Search form (takes remaining space) */
+/* Search form — sole grid item; min-height:0 lets it collapse in 0fr row */
 header .header .nav-search-form {
-  flex: 1;
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 16px;
   max-width: 700px;
+  height: 88px;
 }
 
-/* Floating label input field */
+/* Floating label input field — bottom-line style matching original */
 header .header .nav-search-field {
   position: relative;
   flex: 1;
@@ -115,26 +115,29 @@ header .header .nav-search-field {
 header .header .nav-search-input {
   width: 100%;
   height: 48px;
-  padding: 16px 16px 4px;
-  border: 1px solid #767676;
-  border-radius: 4px;
+  /* original: padding 15px 16px 0px — top pad leaves room for floating label */
+  padding: 15px 16px 0;
+  border: none;
+  border-bottom: 1px solid #767676;
+  border-radius: 0;
   font-size: 16px;
+  font-weight: 500;
   font-family: var(--body-font-family);
   background: #fff;
   box-sizing: border-box;
   outline: none;
   appearance: none;
+  color: #212121;
 }
 
 header .header .nav-search-input:focus {
-  border-color: #212121;
-  border-width: 2px;
+  border-bottom: 2px solid #212121;
 }
 
 header .header .nav-search-label {
   position: absolute;
   top: 50%;
-  left: 16px;
+  left: 0;
   transform: translateY(-50%);
   font-size: 16px;
   font-family: var(--body-font-family);
@@ -146,13 +149,13 @@ header .header .nav-search-label {
 /* Float the label when input has value or is focused */
 header .header .nav-search-input:not(:placeholder-shown) ~ .nav-search-label,
 header .header .nav-search-input:focus ~ .nav-search-label {
-  top: 8px;
+  top: 4px;
   transform: translateY(0);
   font-size: 12px;
   color: #212121;
 }
 
-/* Search submit button (red pill, exact original measurements) */
+/* Search submit button — exact original: 48px, red pill, padding 0 48px */
 header .header .nav-search-submit {
   height: 48px;
   padding: 0 48px;
@@ -172,21 +175,28 @@ header .header .nav-search-submit:hover {
   background-color: var(--brand-red-dark, #a81b0d);
 }
 
-/* Close button — hidden until pane is open */
+/* Close button — 32×32px, absolute top-right within content boundary */
 header .header .nav-search-close {
+  position: absolute;
+  top: 50%;
+  right: max(16px, calc((100% - var(--content-max-width, 1200px)) / 2 + 16px));
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: none;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 1;
   color: #212121;
-  padding: 8px;
-  flex-shrink: 0;
-  display: none;
+  padding: 0;
 }
 
 header .header .nav-search-pane.is-open .nav-search-close {
-  display: block;
+  display: flex;
 }
 
 header .header .nav-search-close:hover {
