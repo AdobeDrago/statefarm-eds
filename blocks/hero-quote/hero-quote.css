@@ -28,8 +28,8 @@
   padding: 24px 15px;
 }
 
-/* Image cell — source renders this as a small inline glyph (16px), not a hero.
-   Keep it at its natural size, aligned with the heading. */
+/* Image cell — default: small inline glyph (auto page radio icon).
+   Use the "lifestyle" variant for full-size hero images. */
 .hero-quote > div:first-child {
   order: 1;
 }
@@ -44,6 +44,15 @@
   width: 16px;
   height: 16px;
   object-fit: fill;
+}
+
+/* lifestyle variant: full-size image fills the right column */
+.hero-quote.lifestyle > div:first-child picture,
+.hero-quote.lifestyle > div:first-child img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Text cell — heading + intro copy */
