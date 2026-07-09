@@ -18,7 +18,15 @@ export default function parse(element, { document }) {
   let cards = Array.from(element.querySelectorAll('[class*="-oneX-col"]'))
     .filter((col) => col.querySelector('img') && col.querySelector('a'));
 
-  // Fallback: article image-link containers (simple-insights outer variant)
+  // Fallback 1: anchor-wrapped cards (each card IS an <a> containing an image).
+  // Used by the homeowners "Simple Insights" grid, where the title link wraps
+  // the thumbnail + title text (so the card itself is the anchor).
+  if (cards.length === 0) {
+    cards = Array.from(element.querySelectorAll('a[class*="image-link_container"]'))
+      .filter((a) => a.querySelector('img'));
+  }
+
+  // Fallback 2: article image-link containers that hold a nested image + link.
   if (cards.length === 0) {
     cards = Array.from(element.querySelectorAll('[class*="image-link_container"]'))
       .filter((c) => c.querySelector('img') && c.querySelector('a'));
@@ -33,25 +41,47 @@ export default function parse(element, { document }) {
   const cells = [];
   cards.forEach((card) => {
     const image = card.querySelector('picture img, img');
-    // Article title link (block-styled link). Prefer a link that is not inside the image.
-    let titleLink = card.querySelector('a[class*="link--block"], a[class*="link-secondary"]');
-    if (!titleLink) {
-      titleLink = Array.from(card.querySelectorAll('a'))
-        .find((a) => !a.querySelector('img'));
+    // Article title link (block-styled link). If the card element itself is the
+    // anchor (homeowners Simple Insights), it wraps both the image and the title
+    // text — rebuild a clean text-only link so the image isn't duplicated in the
+    // text cell. Otherwise find a descendant title link.
+    let titleLink = null;
+    if (card.tagName === 'A') {
+      titleLink = document.createElement('a');
+      titleLink.href = card.getAttribute('href');
+      // Use the anchor's own text (excludes nested image/picture markup).
+      titleLink.textContent = card.textContent.trim();
+    } else {
+      titleLink = card.querySelector('a[class*="link--block"], a[class*="link-secondary"]')
+        || Array.from(card.querySelectorAll('a')).find((a) => !a.querySelector('img'));
     }
 
-    const textCell = [];
-    if (titleLink) textCell.push(titleLink);
-    // Optional description paragraph (product pages)
-    const desc = card.querySelector('p');
-    if (desc) textCell.push(desc);
+    // Optional description paragraph (product pages) — only for non-anchor cards.
+    const desc = card.tagName === 'A' ? null : card.querySelector('p');
 
-    if (image || textCell.length) {
+    // Cell 1 maps to the "image" reference field (imageAlt collapses into the
+    // <img> alt attribute, so no hint for it). Cell 2 maps to the "text"
+    // richtext field (title link + optional description).
+    let imageCell = '';
+    if (image) {
+      const cell = document.createDocumentFragment();
+      cell.appendChild(document.createComment(' field:image '));
+      cell.appendChild(image);
+      imageCell = cell;
+    }
+
+    let textCell = '';
+    if (titleLink || desc) {
+      const cell = document.createDocumentFragment();
+      cell.appendChild(document.createComment(' field:text '));
+      if (titleLink) cell.appendChild(titleLink);
+      if (desc) cell.appendChild(desc);
+      textCell = cell;
+    }
+
+    if (imageCell || textCell) {
       // 2-column card row: image | text (pad empties to keep column count equal)
-      cells.push([
-        image ? [image] : '',
-        textCell.length ? textCell : '',
-      ]);
+      cells.push([imageCell, textCell]);
     }
   });
 

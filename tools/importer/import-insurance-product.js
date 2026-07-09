@@ -32,7 +32,7 @@ const PAGE_TEMPLATE = {
     { name: 'cards-coverage', instances: ['#why-choose > div.-oneX-container > div.-oneX-row:nth-of-type(2)', '#need-something-more > div.-oneX-container > div.-oneX-row:nth-of-type(2)', '#additional-vehicle > div.-oneX-container > div.-oneX-row:nth-of-type(2)', '#additional-insurance > div.-oneX-container > div.-oneX-row:nth-of-type(2)'] },
     { name: 'cards-checklist', instances: ['#what-do-i-need > div.-oneX-container > div.-oneX-row:nth-of-type(2)', '#types > div.-oneX-container'] },
     { name: 'accordion-faq', instances: ['#panels'] },
-    { name: 'cards-article', instances: ['#__next > main > section.west:nth-of-type(12) > div.-oneX-container > div.-oneX-row', '#simple-insights .simpleInsightsSectionStyles_image-link_container-outer__Gl3Th'] },
+    { name: 'cards-article', instances: ['#__next > main > section.west:nth-of-type(12) > div.-oneX-container > div.-oneX-row', '#simple-insights .simpleInsightsSectionStyles_image-link_container-outer__Gl3Th', '#__next > main > div:nth-of-type(1) > section:nth-of-type(3) > div.-oneX-container > div.-oneX-row'] },
     { name: 'columns-promo', instances: ['#ting > div.-oneX-container'] },
   ],
   sections: [
