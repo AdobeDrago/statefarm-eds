@@ -1,0 +1,41 @@
+{
+  "variantName": "columns-category",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-09T14:05:53.312Z",
+  "sourceContext": {
+    "originUrl": "https://www.statefarm.com/insurance",
+    "originPage": "insurance category hub",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "category-intro",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + description",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "category/section intros pairing an image with heading+copy",
+      "two-column informational rows"
+    ],
+    "notSuitableFor": [
+      "repeating item grids (use cards)",
+      "accent/colored CTA panels (use columns-agent-cta)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/insurance",
+      "/insurance/auto",
+      "/insurance/homeowners"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-07-09T14:20:00.000Z"
+  }
+}

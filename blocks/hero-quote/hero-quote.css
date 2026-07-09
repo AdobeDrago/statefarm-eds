@@ -1,0 +1,139 @@
+/*
+ * hero-quote block
+ * Migrated from State Farm masthead (#masthead-a on /insurance/auto).
+ * Source is a two-column masthead: heading + intro copy on the left,
+ * hero image on the right, inside a 1140px centered container.
+ *
+ * All values below come from getComputedStyle() on the live source at
+ * 600px / 780px / 1440px viewports (mobile-first, breakpoint at 900px).
+ *
+ * Authored DOM (auto.plain.html):
+ *   .hero-quote > div:first-child  > div   -> image cell (checked/radio icon)
+ *   .hero-quote > div:last-child   > div   -> text cell (h1 + intro p)
+ */
+
+/* Full-width: neutralize the EDS section max-width wrapper for this block */
+.hero-quote-container .hero-quote-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-quote {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: var(--content-max-width); /* source container 1140px ~ 1200px brand cap */
+  margin: 0 auto;
+  padding: 24px 15px;
+}
+
+/* Image cell — source renders this as a small inline glyph (16px), not a hero.
+   Keep it at its natural size, aligned with the heading. */
+.hero-quote > div:first-child {
+  order: 1;
+}
+
+.hero-quote > div:first-child > div {
+  margin: 0;
+}
+
+.hero-quote > div:first-child picture,
+.hero-quote > div:first-child img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: fill;
+}
+
+/* Text cell — heading + intro copy */
+.hero-quote > div:last-child {
+  order: 2;
+  width: 100%;
+}
+
+.hero-quote > div:last-child > div {
+  margin: 0;
+}
+
+/* Heading — MecherleSans 600. Source color is a warm dark grey #403c3c
+   (distinct from the body text #212121). */
+.hero-quote h1 {
+  margin: 0 0 8px;
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 28px;
+  color: #403c3c;
+  text-align: left;
+}
+
+/* Footnote superscript links inside the heading stay small and unstyled-large */
+.hero-quote h1 sup {
+  font-size: 0.5em;
+}
+
+/* Intro copy — body font 400, brand text color #212121 */
+.hero-quote p {
+  margin: 16px 0 24px;
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--text-color);
+  text-align: left;
+}
+
+.hero-quote p sup {
+  font-size: 0.7em;
+}
+
+/* Tablet — source bumps h1 to 39px / intro to 18px around 780px */
+@media (width >= 768px) {
+  .hero-quote h1 {
+    font-size: var(--heading-size-xxl); /* 39px */
+    line-height: 39px;
+  }
+
+  .hero-quote p {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+/* Desktop — two-column masthead: text left, image right.
+   Source: 50/50 columns inside 1140px container, h1 48px, intro 19px. */
+@media (width >= 900px) {
+  .hero-quote {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    padding: 40px 15px 48px;
+  }
+
+  .hero-quote > div:last-child {
+    order: 1;
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
+
+  .hero-quote > div:first-child {
+    order: 2;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .hero-quote h1 {
+    font-size: 48px;
+    line-height: 48px;
+    margin: 0 0 8px;
+  }
+
+  .hero-quote p {
+    font-size: 19px;
+    line-height: 26px;
+  }
+}

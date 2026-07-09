@@ -1,0 +1,43 @@
+.cards-checklist > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  grid-gap: 24px;
+}
+
+.cards-checklist > ul > li {
+  border: 1px solid #dadada;
+  background-color: var(--background-color);
+}
+
+.cards-checklist .cards-checklist-card-body {
+  margin: 16px;
+}
+
+/* Checklist cards: heading + bulleted/numbered list of required items */
+.cards-checklist .cards-checklist-card-body h3,
+.cards-checklist .cards-checklist-card-body h4 {
+  margin-top: 0;
+}
+
+.cards-checklist .cards-checklist-card-body ul,
+.cards-checklist .cards-checklist-card-body ol {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.cards-checklist .cards-checklist-card-body li {
+  margin-bottom: 10px;
+}
+
+.cards-checklist .cards-checklist-card-image {
+  line-height: 0;
+}
+
+.cards-checklist > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}

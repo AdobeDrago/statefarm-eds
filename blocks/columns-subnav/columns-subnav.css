@@ -1,0 +1,51 @@
+.columns-subnav > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-subnav img {
+  width: 100%;
+}
+
+.columns-subnav > div > div {
+  order: 1;
+}
+
+.columns-subnav > div > .columns-subnav-img-col {
+  order: 0;
+}
+
+.columns-subnav > div > .columns-subnav-img-col img {
+  display: block;
+}
+
+/* Sub-navigation bar: sticky sub-nav with page links + quote form */
+.columns-subnav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 12px 0;
+  background-color: var(--light-color, #f4f4f4);
+}
+
+.columns-subnav > div {
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.columns-subnav a {
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .columns-subnav > div {
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns-subnav > div > div {
+    flex: 1;
+    order: unset;
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "variantName": "cards-checklist",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-09T14:20:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.statefarm.com/insurance/auto",
+    "originPage": "auto insurance product page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "checklist",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "label heading + bulleted/numbered list of items, repeating",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "'what do I need' / requirement checklists (heading + list, no images)",
+      "grouped list-bearing cards where each card carries a title and a bulleted list"
+    ],
+    "notSuitableFor": [
+      "text-only link grids without lists (use cards-coverage)",
+      "article teasers with thumbnails (use cards-article)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/insurance/auto", "/insurance/homeowners"],
+    "reuseCount": 2,
+    "lastUsed": "2026-07-09T14:20:00.000Z"
+  }
+}

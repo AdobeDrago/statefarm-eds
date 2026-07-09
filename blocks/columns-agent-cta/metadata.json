@@ -1,0 +1,41 @@
+{
+  "variantName": "columns-agent-cta",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-09T14:05:53.312Z",
+  "sourceContext": {
+    "originUrl": "https://www.statefarm.com/insurance",
+    "originPage": "insurance category hub",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "accent",
+    "density": "spacious",
+    "purpose": "agent-cta",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + copy + zip form + image",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "find-an-agent / lead-capture CTA panels on a red accent background",
+      "promotional two-column callouts with a form"
+    ],
+    "notSuitableFor": [
+      "plain light category intros (use columns-category)",
+      "simple side-by-side text without accent styling"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/insurance",
+      "/insurance/auto",
+      "/insurance/homeowners"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-07-09T14:20:00.000Z"
+  }
+}

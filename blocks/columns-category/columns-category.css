@@ -1,0 +1,116 @@
+/*
+ * columns-category — State Farm "category intro" rows.
+ * Source: statefarm.com/insurance (Vehicle / Home / Personal / Small business intros)
+ *         and statefarm.com/insurance/auto (#fit-your-needs, #drive-safe-steer).
+ *
+ * Layout: 2-column row — image on one side, H2 + description on the other.
+ * Sides ALTERNATE per row: odd rows = image left, even rows = image right.
+ * Values extracted from source computed styles at 1440px (content width 1140px).
+ * Mobile-first: stacked (image above text); side-by-side at >= 900px.
+ */
+
+.columns-category {
+  color: #212121;
+}
+
+/* --- Mobile-first: single column, stacked --- */
+.columns-category > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-category > div > div {
+  order: 1;
+}
+
+/* image cell sits above the text on mobile */
+.columns-category > div > .columns-category-img-col {
+  order: 0;
+  margin-bottom: 16px;
+}
+
+.columns-category img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: fill;
+  border-radius: 0;
+}
+
+/* Typography (matches source at all breakpoints) */
+.columns-category h2 {
+  margin: 0 0 16px;
+  color: #403c3c;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.columns-category p {
+  margin: 0 0 24px;
+  color: #212121;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.columns-category p:last-child {
+  margin-bottom: 0;
+}
+
+/* Inline text links: brand red, no underline (source) */
+.columns-category p a:any-link {
+  color: var(--brand-red);
+  text-decoration: none;
+}
+
+.columns-category p a:hover {
+  color: var(--brand-red);
+  text-decoration: underline;
+}
+
+/* --- Desktop: 2-column row, alternating image side --- */
+@media (width >= 900px) {
+  .columns-category > div {
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .columns-category > div > div {
+    flex: 1 1 50%;
+    order: unset;
+    min-width: 0;
+  }
+
+  .columns-category > div > .columns-category-img-col {
+    margin-bottom: 0;
+  }
+
+  /* larger heading on desktop, margin below text bumps to source value */
+  .columns-category h2 {
+    font-size: 39px;
+    line-height: 39px;
+  }
+
+  .columns-category p {
+    margin-bottom: 48px;
+  }
+
+  .columns-category p:last-child {
+    margin-bottom: 0;
+  }
+
+  /*
+   * Alternating sides. The image cell is flagged .columns-category-img-col by
+   * the block JS. When the image is the FIRST cell in the row it naturally sits
+   * left; when the block author places the image in the second cell we pull it
+   * back to the left on odd rows and push it right on even rows so the layout
+   * zig-zags like the source.
+   */
+  .columns-category > div:nth-child(even) > .columns-category-img-col {
+    order: 1;
+  }
+
+  .columns-category > div:nth-child(even) > div:not(.columns-category-img-col) {
+    order: 0;
+  }
+}

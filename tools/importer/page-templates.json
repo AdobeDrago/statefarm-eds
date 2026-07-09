@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "insurance-hub",
+      "urls": [
+        "https://www.statefarm.com/insurance"
+      ],
+      "representativeUrl": "https://www.statefarm.com/insurance",
+      "coverageGaps": [],
+      "description": "Insurance category hub/landing page: hero with quote form, followed by category rows (vehicle, home & property, personal, small business) each with a description and a grid of coverage links, a find-an-agent CTA, a Simple Insights article grid, and disclosures.",
+      "blocks": [
+        {
+          "name": "hero-quote",
+          "instances": ["#__next > main > section.west.general_overflow___oFWQ.-w_pt-48"]
+        },
+        {
+          "name": "columns-category",
+          "instances": [
+            "#__next > main > section.west.general_overflow___oFWQ.-w_mt-64",
+            "#__next > main > section.west.general_overflow___oFWQ.-w_mt-48"
+          ]
+        },
+        {
+          "name": "cards-coverage",
+          "instances": [".general_grid-wrapper__bjQyF"]
+        },
+        {
+          "name": "columns-agent-cta",
+          "instances": ["#find-agent .findAgentStyles_color_container__vEsF5"]
+        },
+        {
+          "name": "cards-article",
+          "instances": ["#__next > main > section.west.-w_mt-88.-w_mt-sm-96.-w_mt-md-104.-w_mt-lg-112.-w_mt-xl-120 > div.-oneX-container > div.-oneX-row"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc3",
+          "name": "Hero with quote form",
+          "selector": "#__next > main > section.west.general_overflow___oFWQ.-w_pt-48",
+          "style": null,
+          "blocks": ["hero-quote"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc5",
+          "name": "Vehicle insurance category row",
+          "selector": "#__next > main > section.west.general_overflow___oFWQ.-w_mt-64",
+          "style": null,
+          "blocks": ["columns-category", "cards-coverage"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc7",
+          "name": "Home & property insurance category row",
+          "selector": "#__next > main > section.west.general_overflow___oFWQ.-w_mt-48:nth-of-type(5)",
+          "style": null,
+          "blocks": ["columns-category", "cards-coverage"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc9",
+          "name": "Personal insurance category row",
+          "selector": "#__next > main > section.west.general_overflow___oFWQ.-w_mt-48:nth-of-type(7)",
+          "style": null,
+          "blocks": ["columns-category", "cards-coverage"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc11",
+          "name": "Small business insurance category row",
+          "selector": "#__next > main > section.west.general_overflow___oFWQ.-w_mt-48:nth-of-type(9)",
+          "style": null,
+          "blocks": ["columns-category", "cards-coverage"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc12",
+          "name": "Find-an-agent CTA",
+          "selector": "#find-agent",
+          "style": null,
+          "blocks": ["columns-agent-cta"],
+          "defaultContent": []
+        },
+        {
+          "id": "rc13",
+          "name": "Simple Insights article grid",
+          "selector": "#__next > main > section.west.-w_mt-88.-w_mt-sm-96.-w_mt-md-104.-w_mt-lg-112.-w_mt-xl-120",
+          "style": null,
+          "blocks": ["cards-article"],
+          "defaultContent": [
+            "#__next > main > section.west.-w_mt-88.-w_mt-sm-96.-w_mt-md-104.-w_mt-lg-112.-w_mt-xl-120 > div.-oneX-container > h2",
+            "#__next > main > section.west.-w_mt-88.-w_mt-sm-96.-w_mt-md-104.-w_mt-lg-112.-w_mt-xl-120 > div.-oneX-container > p"
+          ]
+        },
+        {
+          "id": "rc15",
+          "name": "Disclosures / footnotes",
+          "selector": "#__next > main > section.west.disclosure",
+          "style": null,
+          "blocks": [],
+          "defaultContent": ["#__next > main > section.west.disclosure > div.-oneX-container"]
+        }
+      ]
+    },
+    {
+      "name": "insurance-product",
+      "urls": [
+        "https://www.statefarm.com/insurance/auto",
+        "https://www.statefarm.com/insurance/homeowners"
+      ],
+      "representativeUrl": "https://www.statefarm.com/insurance/auto",
+      "coverageGaps": [
+        {
+          "url": "https://www.statefarm.com/insurance/homeowners",
+          "sections": [
+            { "sectionSignature": "s(s,s,2x1,s,2x1,s,2x1,s,2x1)", "nodeMapId": "rc8" },
+            { "sectionSignature": "2x1", "nodeMapId": "rc9" }
+          ]
+        }
+      ],
+      "description": "Insurance product detail page: breadcrumb, masthead hero with quote form, sticky subnav, product coverage cards, bundle CTA, discount/feature highlights, why-choose grid, what-you-need checklists, FAQ accordion, find-an-agent CTA, additional-options grid, Simple Insights article grid, and disclosures.",
+      "blocks": [
+        { "name": "hero-quote", "instances": ["#masthead-a", "#masthead"] },
+        { "name": "columns-subnav", "instances": ["#subnav > div.-oneX-container", "#subnav"] },
+        { "name": "columns-category", "instances": ["#fit-your-needs > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#drive-safe-steer > div.-oneX-container"] },
+        { "name": "columns-agent-cta", "instances": ["#bundle .-oneX-container", "#find-agent .findAgentStyles_color_container__vEsF5", "#find-agent .-oneX-container"] },
+        { "name": "cards-coverage", "instances": ["#why-choose > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#need-something-more > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#additional-vehicle > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#additional-insurance > div.-oneX-container > div.-oneX-row:nth-of-type(2)"] },
+        { "name": "cards-checklist", "instances": ["#what-do-i-need > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#types > div.-oneX-container"] },
+        { "name": "accordion-faq", "instances": ["#panels"] },
+        { "name": "cards-article", "instances": ["#__next > main > section.west:nth-of-type(12) > div.-oneX-container > div.-oneX-row", "#simple-insights .simpleInsightsSectionStyles_image-link_container-outer__Gl3Th"] },
+        { "name": "columns-promo", "instances": ["#ting > div.-oneX-container"] }
+      ],
+      "sections": [
+        { "id": "rc4", "name": "Masthead hero with quote form", "selector": ["#masthead-a", "#masthead"], "style": null, "blocks": ["hero-quote"], "defaultContent": [] },
+        { "id": "rc5", "name": "Sticky sub-navigation", "selector": "#subnav", "style": "grey", "blocks": ["columns-subnav"], "defaultContent": [] },
+        { "id": "rc6", "name": "Fit your needs", "selector": "#fit-your-needs", "style": null, "blocks": ["columns-category"], "defaultContent": ["#fit-your-needs > div.-oneX-container > div.-oneX-row:nth-of-type(1)"] },
+        { "id": "rc7", "name": "Bundle CTA", "selector": "#bundle", "style": "accent", "blocks": ["columns-agent-cta"], "defaultContent": [] },
+        { "id": "rc8", "name": "Drive Safe Steer Clear", "selector": "#drive-safe-steer", "style": null, "blocks": ["columns-category"], "defaultContent": [] },
+        { "id": "rc9", "name": "Why choose grid", "selector": "#why-choose", "style": null, "blocks": ["cards-coverage"], "defaultContent": ["#why-choose > div.-oneX-container > div.-oneX-row:nth-of-type(1)"] },
+        { "id": "rc10", "name": "Specific needs grid", "selector": "#need-something-more", "style": null, "blocks": ["cards-coverage"], "defaultContent": ["#need-something-more > div.-oneX-container > div.-oneX-row:nth-of-type(1)"] },
+        { "id": "rc11", "name": "What do I need checklists", "selector": "#what-do-i-need", "style": null, "blocks": ["cards-checklist"], "defaultContent": ["#what-do-i-need > div.-oneX-container > div.-oneX-row:nth-of-type(1)"] },
+        { "id": "rc12", "name": "FAQ accordion", "selector": "#faq", "style": null, "blocks": ["accordion-faq"], "defaultContent": ["#faq > div.-oneX-container > div.-oneX-row:nth-of-type(1)"] },
+        { "id": "rc13", "name": "Find-an-agent CTA", "selector": "#find-agent", "style": null, "blocks": ["columns-agent-cta"], "defaultContent": [] },
+        { "id": "rc14", "name": "Additional vehicle grid", "selector": "#additional-vehicle", "style": null, "blocks": ["cards-coverage"], "defaultContent": ["#additional-vehicle > div.-oneX-container > div.-oneX-row:nth-of-type(1)"] },
+        { "id": "rc15", "name": "Simple Insights article grid", "selector": ["#__next > main > section.west:nth-of-type(12)", "#simple-insights"], "style": null, "blocks": ["cards-article"], "defaultContent": [] },
+        { "id": "rc17", "name": "Disclosures", "selector": ["#disclosures", "#disclosure"], "style": null, "blocks": [], "defaultContent": ["#disclosures > div.-oneX-container", "#disclosure > div.-oneX-container"] },
+        { "id": "gap-types", "name": "Homeowners what-you-need checklists", "selector": "#types", "style": null, "blocks": ["cards-checklist"], "defaultContent": ["#types > div.-oneX-container > div.-oneX-row:nth-of-type(1)"] },
+        { "id": "gap-ting", "name": "Ting partner promo", "selector": "#ting", "style": null, "blocks": ["columns-promo"], "defaultContent": [] }
+      ]
+    }
+  ]
+}

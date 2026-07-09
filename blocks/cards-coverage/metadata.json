@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-coverage",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-09T14:05:53.312Z",
+  "sourceContext": {
+    "originUrl": "https://www.statefarm.com/insurance",
+    "originPage": "insurance category hub",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "coverage-links",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "title + linked coverage phrase (no image)",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "grids of text-only coverage/product links (title + link)",
+      "scannable link menus grouped under a category"
+    ],
+    "notSuitableFor": [
+      "cards that include images (use cards-article)",
+      "long descriptive feature cards"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/insurance",
+      "/insurance/auto"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-07-09T14:20:00.000Z"
+  }
+}

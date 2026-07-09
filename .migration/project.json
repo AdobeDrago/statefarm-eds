@@ -1,0 +1,10 @@
+{
+  "type": "da",
+  "sites": {
+    "statefarm-eds": {
+      "previewOrg": "AdobeDrago",
+      "previewSite": "statefarm-eds",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

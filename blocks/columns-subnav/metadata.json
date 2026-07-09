@@ -1,0 +1,37 @@
+{
+  "variantName": "columns-subnav",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-09T14:20:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.statefarm.com/insurance/auto",
+    "originPage": "auto insurance product page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "grey",
+    "density": "compact",
+    "purpose": "sticky-subnav",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "collapsible Explore box with in-page links + sticky ZIP quote form",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "sticky in-page sub-navigation bars under a product masthead",
+      "two-column nav + quote/lead form bars that fix on scroll"
+    ],
+    "notSuitableFor": [
+      "general side-by-side informational content (use columns-category)",
+      "accent lead-capture CTAs (use columns-agent-cta)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/insurance/auto", "/insurance/homeowners"],
+    "reuseCount": 2,
+    "lastUsed": "2026-07-09T14:20:00.000Z"
+  }
+}

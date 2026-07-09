@@ -1,0 +1,28 @@
+:root {
+  /* Typography — MecherleSans is State Farm's proprietary font; falls back to Arial */
+  --heading-font-family: "MecherleSans", arial, helvetica, sans-serif;
+  --body-font-family: "MecherleSans", arial, helvetica, sans-serif;
+
+  /* Brand colors */
+  --background-color: #fff;
+  --text-color: #212121;
+  --link-color: #d62311;
+  --link-hover-color: #0056b3;
+  --brand-red: #d62311;
+  --brand-red-dark: #a81b0d;
+  --section-light-bg: #f5f5f5;
+  --section-dark-bg: #212121;
+
+  /* Spacing */
+  --section-padding: 48px;
+  --content-max-width: 1200px;
+  --nav-height: 65px;
+
+  /* Heading sizes (desktop) */
+  --heading-size-xxl: 39px;
+  --heading-size-xl: 33px;
+  --heading-size-l: 27px;
+  --heading-size-m: 22px;
+  --heading-size-s: 19px;
+  --heading-size-xs: 16px;
+}

@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://www.statefarm.com/insurance",
+  "path": "insurance",
+  "timestamp": "2026-07-09T14:45:43.784Z",
+  "title": "Types of Insurance Coverage | State Farm® - State Farm®",
+  "template": "insurance-hub",
+  "blocks": [
+    "hero-quote",
+    "columns-category",
+    "columns-category",
+    "columns-category",
+    "columns-category",
+    "cards-coverage",
+    "cards-coverage",
+    "cards-coverage",
+    "cards-coverage",
+    "columns-agent-cta",
+    "cards-article"
+  ]
+}
