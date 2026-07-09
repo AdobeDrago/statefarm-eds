@@ -3,14 +3,22 @@
    Mobile-first: 1-up -> 2-up (>=600px) -> 4-up (>=900px), matching source
    oneX columns (col-12 / col-sm-6 / col-lg-3). */
 
+.cards-article-wrapper {
+  /* source: 48px gap from subtitle paragraph bottom to card grid (source P has margin-bottom:48px).
+     EDS default-content-wrapper paragraph only carries 16px margin-bottom, so add 32px here. */
+  margin-top: 32px;
+}
+
 .cards-article > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  /* source card gutter is 15px each side => 30px between cards */
-  gap: 30px;
+  /* source column gutter: 15px padding each side per col = 30px between images */
+  column-gap: 30px;
+  /* source flex grid has no explicit row-gap; rows stack directly */
+  row-gap: 0;
 }
 
 .cards-article > ul > li {
@@ -28,8 +36,8 @@
 .cards-article .cards-article-card-image img {
   display: block;
   width: 100%;
-  /* source thumbnail 255x142 ~= 16/9 */
-  aspect-ratio: 16 / 9;
+  /* source thumbnail natural size 345x196; matches rendered 255x142 at desktop */
+  aspect-ratio: 345 / 196;
   object-fit: cover;
   /* source: rounded top corners only */
   border-radius: 4px 4px 0 0;
