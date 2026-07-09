@@ -1,7 +1,8 @@
 :root {
-  /* Typography — MecherleSans is State Farm's proprietary font; falls back to Arial */
-  --heading-font-family: "MecherleSans", arial, helvetica, sans-serif;
-  --body-font-family: "MecherleSans", arial, helvetica, sans-serif;
+  /* Typography — MecherleSans is State Farm's proprietary font (not publicly available).
+     Source Sans Pro is a visually similar open humanist sans-serif served via Google Fonts. */
+  --heading-font-family: "Source Sans 3", "Source Sans Pro", arial, helvetica, sans-serif;
+  --body-font-family: "Source Sans 3", "Source Sans Pro", arial, helvetica, sans-serif;
 
   /* Brand colors */
   --background-color: #fff;

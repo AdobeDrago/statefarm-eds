@@ -134,6 +134,8 @@ main img {
 /* Sections */
 main .section {
   padding: 32px 16px;
+  /* prevent sub-pixel rendering gaps between adjacent section wrappers */
+  overflow: hidden;
 }
 
 main .section > div {
