@@ -5,10 +5,7 @@ export default async function decorate(block) {
   const footerMeta = block.querySelector('a[href]')?.getAttribute('href');
   const footerPath = footerMeta || '/footer';
 
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) {
-    resp = await fetch(`${footerPath}.plain.html`);
-  }
+  let resp = await fetch(`${footerPath}.plain.html`);
   if (!resp.ok) return;
 
   const html = await resp.text();

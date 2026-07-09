@@ -11,10 +11,7 @@ export default async function decorate(block) {
   const navMeta = block.querySelector('a[href]')?.getAttribute('href');
   const navPath = navMeta || '/nav';
 
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) {
-    resp = await fetch(`${navPath}.plain.html`);
-  }
+  let resp = await fetch(`${navPath}.plain.html`);
   if (!resp.ok) return;
 
   const html = await resp.text();
