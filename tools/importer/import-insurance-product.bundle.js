@@ -190,14 +190,20 @@ var CustomImportScript = (() => {
     }
     const cells = [];
     items.forEach((item) => {
-      const cardContent = [];
       const heading = item.querySelector('h3, h4, h5, h6, [class*="title"]');
-      if (heading) cardContent.push(heading);
-      item.querySelectorAll(":scope > p, p").forEach((p) => {
-        if (!cardContent.includes(p)) cardContent.push(p);
+      const cell = document.createDocumentFragment();
+      cell.appendChild(document.createComment(" field:text "));
+      let hasContent = false;
+      if (heading) {
+        cell.appendChild(heading);
+        hasContent = true;
+      }
+      Array.from(item.querySelectorAll(":scope > p, p")).forEach((p) => {
+        cell.appendChild(p);
+        hasContent = true;
       });
-      if (cardContent.length) {
-        cells.push([cardContent]);
+      if (hasContent) {
+        cells.push([cell]);
       }
     });
     if (cells.length === 0) {
@@ -218,15 +224,26 @@ var CustomImportScript = (() => {
     }
     const cells = [];
     cards.forEach((card) => {
-      const cardContent = [];
+      const cell = document.createDocumentFragment();
+      cell.appendChild(document.createComment(" field:text "));
+      let hasContent = false;
       const heading = card.querySelector(":scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6");
-      if (heading) cardContent.push(heading);
+      if (heading) {
+        cell.appendChild(heading);
+        hasContent = true;
+      }
       const list = card.querySelector(":scope > ul");
-      if (list) cardContent.push(list);
+      if (list) {
+        cell.appendChild(list);
+        hasContent = true;
+      }
       const footnote = card.querySelector(":scope > p");
-      if (footnote) cardContent.push(footnote);
-      if (cardContent.length) {
-        cells.push([cardContent]);
+      if (footnote) {
+        cell.appendChild(footnote);
+        hasContent = true;
+      }
+      if (hasContent) {
+        cells.push([cell]);
       }
     });
     if (cells.length === 0) {
@@ -249,20 +266,25 @@ var CustomImportScript = (() => {
       const control = panel.querySelector('.-oneX-panel-control, [role="heading"], [class*="panel-control"]');
       let titleEl = panel.querySelector('.-oneX-panel-button, button, [class*="panel-button"]');
       let titleCell = "";
-      if (titleEl && titleEl.textContent.trim()) {
+      const titleText = titleEl && titleEl.textContent.trim() || control && control.textContent.trim() || "";
+      if (titleText) {
+        const cell = document.createDocumentFragment();
+        cell.appendChild(document.createComment(" field:summary "));
         const h = document.createElement("h3");
-        h.textContent = titleEl.textContent.trim();
-        titleCell = [h];
-      } else if (control && control.textContent.trim()) {
-        const h = document.createElement("h3");
-        h.textContent = control.textContent.trim();
-        titleCell = [h];
+        h.textContent = titleText;
+        cell.appendChild(h);
+        titleCell = cell;
       }
       const content = panel.querySelector('.-oneX-panel-content, [class*="panel-content"]');
       let contentCell = "";
       if (content) {
         const nodes = Array.from(content.children).filter((c) => c.textContent.trim() || c.querySelector("img"));
-        if (nodes.length) contentCell = nodes;
+        if (nodes.length) {
+          const cell = document.createDocumentFragment();
+          cell.appendChild(document.createComment(" field:text "));
+          nodes.forEach((n) => cell.appendChild(n));
+          contentCell = cell;
+        }
       }
       if (titleCell || contentCell) {
         cells.push([titleCell || "", contentCell || ""]);
@@ -280,6 +302,9 @@ var CustomImportScript = (() => {
   function parse8(element, { document }) {
     let cards = Array.from(element.querySelectorAll('[class*="-oneX-col"]')).filter((col) => col.querySelector("img") && col.querySelector("a"));
     if (cards.length === 0) {
+      cards = Array.from(element.querySelectorAll('a[class*="image-link_container"]')).filter((a) => a.querySelector("img"));
+    }
+    if (cards.length === 0) {
       cards = Array.from(element.querySelectorAll('[class*="image-link_container"]')).filter((c) => c.querySelector("img") && c.querySelector("a"));
     }
     if (cards.length === 0) {
@@ -289,19 +314,32 @@ var CustomImportScript = (() => {
     const cells = [];
     cards.forEach((card) => {
       const image = card.querySelector("picture img, img");
-      let titleLink = card.querySelector('a[class*="link--block"], a[class*="link-secondary"]');
-      if (!titleLink) {
-        titleLink = Array.from(card.querySelectorAll("a")).find((a) => !a.querySelector("img"));
+      let titleLink = null;
+      if (card.tagName === "A") {
+        titleLink = document.createElement("a");
+        titleLink.href = card.getAttribute("href");
+        titleLink.textContent = card.textContent.trim();
+      } else {
+        titleLink = card.querySelector('a[class*="link--block"], a[class*="link-secondary"]') || Array.from(card.querySelectorAll("a")).find((a) => !a.querySelector("img"));
       }
-      const textCell = [];
-      if (titleLink) textCell.push(titleLink);
-      const desc = card.querySelector("p");
-      if (desc) textCell.push(desc);
-      if (image || textCell.length) {
-        cells.push([
-          image ? [image] : "",
-          textCell.length ? textCell : ""
-        ]);
+      const desc = card.tagName === "A" ? null : card.querySelector("p");
+      let imageCell = "";
+      if (image) {
+        const cell = document.createDocumentFragment();
+        cell.appendChild(document.createComment(" field:image "));
+        cell.appendChild(image);
+        imageCell = cell;
+      }
+      let textCell = "";
+      if (titleLink || desc) {
+        const cell = document.createDocumentFragment();
+        cell.appendChild(document.createComment(" field:text "));
+        if (titleLink) cell.appendChild(titleLink);
+        if (desc) cell.appendChild(desc);
+        textCell = cell;
+      }
+      if (imageCell || textCell) {
+        cells.push([imageCell, textCell]);
       }
     });
     if (cells.length === 0) {
@@ -457,7 +495,7 @@ var CustomImportScript = (() => {
       { name: "cards-coverage", instances: ["#why-choose > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#need-something-more > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#additional-vehicle > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#additional-insurance > div.-oneX-container > div.-oneX-row:nth-of-type(2)"] },
       { name: "cards-checklist", instances: ["#what-do-i-need > div.-oneX-container > div.-oneX-row:nth-of-type(2)", "#types > div.-oneX-container"] },
       { name: "accordion-faq", instances: ["#panels"] },
-      { name: "cards-article", instances: ["#__next > main > section.west:nth-of-type(12) > div.-oneX-container > div.-oneX-row", "#simple-insights .simpleInsightsSectionStyles_image-link_container-outer__Gl3Th"] },
+      { name: "cards-article", instances: ["#__next > main > section.west:nth-of-type(12) > div.-oneX-container > div.-oneX-row", "#simple-insights .simpleInsightsSectionStyles_image-link_container-outer__Gl3Th", "#__next > main > div:nth-of-type(1) > section:nth-of-type(3) > div.-oneX-container > div.-oneX-row"] },
       { name: "columns-promo", instances: ["#ting > div.-oneX-container"] }
     ],
     sections: [

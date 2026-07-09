@@ -1,31 +1,72 @@
-/* Simple Insights article grid: 4-up thumbnail image + linked title cards. */
+/* Simple Insights article grid: thumbnail image + linked title cards.
+   Values extracted from source (statefarm.com Simple Insights grid).
+   Mobile-first: 1-up -> 2-up (>=600px) -> 4-up (>=900px), matching source
+   oneX columns (col-12 / col-sm-6 / col-lg-3). */
+
 .cards-article > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  grid-gap: 24px;
+  grid-template-columns: 1fr;
+  /* source card gutter is 15px each side => 30px between cards */
+  gap: 30px;
 }
 
 .cards-article > ul > li {
-  background-color: var(--background-color);
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.cards-article .cards-article-card-body {
-  margin: 16px 0 0;
-}
-
-.cards-article .cards-article-card-body a {
-  font-weight: 700;
-}
-
+/* Image cell */
 .cards-article .cards-article-card-image {
   line-height: 0;
 }
 
-.cards-article > ul > li img {
+.cards-article .cards-article-card-image img {
+  display: block;
   width: 100%;
+  /* source thumbnail 255x142 ~= 16/9 */
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  /* source: rounded top corners only */
+  border-radius: 4px 4px 0 0;
+}
+
+/* Title cell — sits flush directly below the image */
+.cards-article .cards-article-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+.cards-article .cards-article-card-body a,
+.cards-article .cards-article-card-body a:any-link {
+  display: block;
+  color: var(--brand-red);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-decoration: none;
+}
+
+.cards-article .cards-article-card-body a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* Tablet: 2-up (source col-sm-6) */
+@media (width >= 600px) {
+  .cards-article > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 4-up (source col-lg-3) */
+@media (width >= 900px) {
+  .cards-article > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

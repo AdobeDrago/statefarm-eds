@@ -1,43 +1,81 @@
+/* Block: cards-checklist -- CSS from source computed styles (statefarm.com/insurance/auto #what-do-i-need)
+ * A no-image, list-bearing layout: each card = heading + bulleted checklist (+ optional footnote).
+ * Source cards have NO border / background / shadow -- they are plain columns.
+ * Decorated DOM: .cards-checklist > ul > li > .cards-checklist-card-body (h3 + ul.items + p?)
+ */
+
 .cards-checklist > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  grid-gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 32px;
 }
 
 .cards-checklist > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  /* plain column -- no card chrome in source */
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0;
 }
 
 .cards-checklist .cards-checklist-card-body {
-  margin: 16px;
+  padding: 0;
 }
 
-/* Checklist cards: heading + bulleted/numbered list of required items */
+/* Card heading -- source: 25px / 500 / line-height 25px / #403c3c / margin 0 0 20px */
 .cards-checklist .cards-checklist-card-body h3,
 .cards-checklist .cards-checklist-card-body h4 {
-  margin-top: 0;
+  font-family: var(--heading-font-family);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 25px;
+  color: #403c3c;
+  margin: 0 0 20px;
 }
 
+/* Bulleted checklist -- source: disc markers, padding-left 20px, margin 0 0 32px */
 .cards-checklist .cards-checklist-card-body ul,
 .cards-checklist .cards-checklist-card-body ol {
-  margin: 0;
-  padding-left: 24px;
+  list-style-position: outside;
+  list-style-type: disc;
+  margin: 0 0 32px;
+  padding: 0 0 0 20px;
 }
 
+.cards-checklist .cards-checklist-card-body ol {
+  list-style-type: decimal;
+}
+
+/* List items -- source: 16px / line-height 21px / #212121 / margin-bottom 10px */
 .cards-checklist .cards-checklist-card-body li {
-  margin-bottom: 10px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--text-color);
+  margin: 0 0 10px;
+  padding: 0;
 }
 
-.cards-checklist .cards-checklist-card-image {
-  line-height: 0;
+.cards-checklist .cards-checklist-card-body li::marker {
+  color: var(--text-color);
 }
 
-.cards-checklist > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+/* Footnote / disclaimer paragraph under a checklist -- source: 12px / line-height 16px / #212121 */
+.cards-checklist .cards-checklist-card-body p {
+  font-size: var(--body-font-size-xs); /* 12px */
+  line-height: 16px;
+  color: var(--text-color);
+  margin: 0 0 16px;
+}
+
+/* Desktop: two columns side by side (source layout at >= 900px) */
+@media (width >= 900px) {
+  .cards-checklist > ul {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 95px;
+    row-gap: 32px;
+  }
 }

@@ -1,12 +1,19 @@
+/*
+ * columns-promo — State Farm & Ting partner promo (light background, 2-col)
+ * Values extracted from source computed styles (#ting on /insurance/homeowners).
+ * Structure (authored + EDS decoration):
+ *   .columns-promo > div                     -> the single row (flex)
+ *   .columns-promo > div > div:first-child   -> text cell (logo <p><picture>, h4, copy, button)
+ *   .columns-promo > div > .columns-promo-img-col -> product image cell (JS-tagged solo picture)
+ */
+
+/* --- Row: mobile-first stacked, image on top --- */
 .columns-promo > div {
   display: flex;
   flex-direction: column;
 }
 
-.columns-promo img {
-  width: 100%;
-}
-
+/* image cell stacks above text on mobile (matches source -oneX ordering) */
 .columns-promo > div > div {
   order: 1;
 }
@@ -15,27 +22,97 @@
   order: 0;
 }
 
+/* --- Logo (State Farm & Ting) — small, must NOT stretch full width --- */
+.columns-promo > div > div:first-child p:first-child picture,
+.columns-promo > div > div:first-child p:first-child img {
+  display: inline-block;
+  width: 194px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Product image (in its own JS-tagged cell) --- */
+.columns-promo > div > .columns-promo-img-col picture,
 .columns-promo > div > .columns-promo-img-col img {
   display: block;
+  width: 100%;
+  max-width: 437px;
+  height: auto;
+  border-radius: 0;
 }
 
-/* Partner promo: light background, logo + heading + copy + secondary button */
-.columns-promo .button-container a.button,
-.columns-promo a.button {
-  background-color: transparent;
-  border: 2px solid var(--text-color, #1a1a1a);
-  color: var(--text-color, #1a1a1a);
+/* --- Heading --- */
+.columns-promo h4 {
+  margin: 16px 0;
+  font-family: var(--heading-font-family);
+  font-size: 31px;
+  font-weight: 500;
+  line-height: 31px;
+  text-transform: none;
+  color: #403c3c;
 }
 
+/* --- Copy --- */
+.columns-promo p {
+  margin: 0 0 40px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-color);
+}
+
+.columns-promo p:first-child {
+  margin: 0;
+}
+
+/* --- Secondary "Explore Ting" button (white bg, red border/text, pill) --- */
+/* Override global filled-red a.button (matches .section > * specificity via main prefix) */
+main .columns-promo a.button:any-link {
+  margin: 0;
+  border: 1px solid var(--brand-red);
+  border-radius: 28px;
+  padding: 0.75em 48px;
+  min-height: 48px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+  text-transform: none;
+  background-color: #fff;
+  color: var(--brand-red);
+}
+
+main .columns-promo a.button:any-link:hover,
+main .columns-promo a.button:any-link:focus {
+  background-color: var(--brand-red);
+  color: #fff;
+}
+
+/* --- Desktop: 2-column row (text ~41.67%, image ~50%) --- */
 @media (width >= 900px) {
   .columns-promo > div {
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    gap: 95px;
   }
 
   .columns-promo > div > div {
-    flex: 1;
     order: unset;
+  }
+
+  /* text column */
+  .columns-promo > div > div:first-child {
+    flex: 0 0 41.6667%;
+    max-width: 475px;
+    text-align: left;
+  }
+
+  /* image column */
+  .columns-promo > div > .columns-promo-img-col {
+    order: unset;
+    flex: 1 1 50%;
+    max-width: 570px;
   }
 }

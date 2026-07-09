@@ -1,51 +1,85 @@
+/*
+ * columns-subnav — sticky in-page sub-navigation bar.
+ *
+ * Source: https://www.statefarm.com/insurance/auto  (#subnav "Explore" box)
+ * Authored DOM (auto.plain.html):
+ *   .columns-subnav > div (row) > div (cell)
+ *     <p>Auto</p>                        <- current page, bold plain text
+ *     <p><a>Discounts</a></p>            <- in-page / section links
+ *     <p><a>Coverages</a></p>
+ * All values below extracted from getComputedStyle on the source element.
+ */
+
+.columns-subnav {
+  /* Grey sub-nav bar background (source: rgb(228, 227, 227)) */
+  background-color: #e4e3e3;
+
+  /* Sticky under the fixed header on scroll */
+  position: sticky;
+  top: var(--nav-height, 65px);
+  z-index: 2003;
+}
+
+/* Row: horizontal link bar */
 .columns-subnav > div {
   display: flex;
-  flex-direction: column;
-}
-
-.columns-subnav img {
-  width: 100%;
-}
-
-.columns-subnav > div > div {
-  order: 1;
-}
-
-.columns-subnav > div > .columns-subnav-img-col {
-  order: 0;
-}
-
-.columns-subnav > div > .columns-subnav-img-col img {
-  display: block;
-}
-
-/* Sub-navigation bar: sticky sub-nav with page links + quote form */
-.columns-subnav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  padding: 12px 0;
-  background-color: var(--light-color, #f4f4f4);
-}
-
-.columns-subnav > div {
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
-  justify-content: space-between;
 }
 
-.columns-subnav a {
+/* Cell holding the link list */
+.columns-subnav > div > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Each item ("Auto", "Discounts", "Coverages") is a <p> */
+.columns-subnav > div > div > p {
+  margin: 0;
+}
+
+/* Link items + current-page label share the same box (source: padding 16px 24px) */
+.columns-subnav > div > div > p,
+.columns-subnav > div > div > p > a:any-link {
+  display: block;
+  padding: 16px 24px;
+  font-family: var(--body-font-family);
+  font-size: 19px;
+  line-height: 22px;
+  color: #767676;
   text-decoration: none;
 }
 
-@media (width >= 900px) {
-  .columns-subnav > div {
-    flex-direction: unset;
-    gap: 24px;
+/* Current-page label (plain text <p> with no link) is bold (source: font-weight 600) */
+.columns-subnav > div > div > p:not(:has(a)) {
+  font-weight: 600;
+}
+
+/* Other in-page links are regular weight (source: font-weight 400) */
+.columns-subnav > div > div > p > a:any-link {
+  padding: 0;
+  font-weight: 400;
+}
+
+.columns-subnav > div > div > p > a:hover,
+.columns-subnav > div > div > p > a:focus {
+  color: var(--text-color, #212121);
+  text-decoration: underline;
+}
+
+/* Mobile: smaller item font, allow wrap (source mobile link font-size: 16px) */
+@media (width < 900px) {
+  .columns-subnav {
+    /* below-header sticky offset only meaningful at desktop nav height */
+    top: 0;
   }
 
-  .columns-subnav > div > div {
-    flex: 1;
-    order: unset;
+  .columns-subnav > div > div > p,
+  .columns-subnav > div > div > p > a:any-link {
+    padding: 12px 16px;
+    font-size: 16px;
   }
 }
