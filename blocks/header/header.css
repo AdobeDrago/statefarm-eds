@@ -32,11 +32,13 @@ header .header .nav-utility-bar {
   box-sizing: border-box;
   font-size: 13px;
   font-family: var(--body-font-family);
+  transition: opacity 0.2s ease-out;
 }
 
-/* Hide utility bar when search is open */
+/* Utility bar fades out but keeps 32px space so pane rolls in from below the grey area */
 header .header.search-open .nav-utility-bar {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 header .header .nav-utility-bar ul {
@@ -79,10 +81,11 @@ header .header .nav-search:hover {
 
 /* ===== Search pane — full-width white panel between utility bar and nav ===== */
 header .header .nav-search-pane {
-  /* close button is position:absolute — only form is a grid item */
+  /* overflow:hidden on the CONTAINER clips the 0fr row; close btn is position:absolute */
   position: relative;
   display: grid;
   grid-template-rows: 0fr;
+  overflow: hidden;
   width: 100%;
   background-color: #fff;
   border-bottom: 1px solid #e4e3e3;
@@ -95,10 +98,9 @@ header .header .nav-search-pane.is-open {
   grid-template-rows: 1fr;
 }
 
-/* Search form — sole grid item; min-height:0 lets it collapse in 0fr row */
+/* Search form — sole grid item; min-height:0 lets grid row collapse to 0 */
 header .header .nav-search-form {
   min-height: 0;
-  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 16px;

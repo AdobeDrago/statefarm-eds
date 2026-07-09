@@ -175,6 +175,8 @@
   position: relative;
   flex: 1 1 140px;
   max-width: 160px;
+  height: 48px;
+  box-sizing: border-box;
   background: #fff;
   border: 1px solid #767676;
   border-radius: 4px;
