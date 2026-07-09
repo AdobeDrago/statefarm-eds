@@ -67,7 +67,13 @@
 }
 
 @media (width >= 900px) {
+  .cards-coverage {
+    max-width: 570px;
+    margin-left: auto;
+  }
+
   .cards-coverage > ul {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 255px));
+    grid-template-columns: 255px 255px;
+    justify-content: end;
   }
 }
