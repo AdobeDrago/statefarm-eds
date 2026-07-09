@@ -25,33 +25,24 @@ export default function parse(element, { document }) {
     const control = panel.querySelector('.-oneX-panel-control, [role="heading"], [class*="panel-control"]');
     let titleEl = panel.querySelector('.-oneX-panel-button, button, [class*="panel-button"]');
 
-    // Build a clean title element (avoid pulling in chevron icons).
-    // Cell 1 maps to the "summary" field of accordion-faq-item.
+    // Build a clean title element (avoid pulling in chevron icons)
     let titleCell = '';
-    const titleText = (titleEl && titleEl.textContent.trim())
-      || (control && control.textContent.trim())
-      || '';
-    if (titleText) {
-      const cell = document.createDocumentFragment();
-      cell.appendChild(document.createComment(' field:summary '));
+    if (titleEl && titleEl.textContent.trim()) {
       const h = document.createElement('h3');
-      h.textContent = titleText;
-      cell.appendChild(h);
-      titleCell = cell;
+      h.textContent = titleEl.textContent.trim();
+      titleCell = [h];
+    } else if (control && control.textContent.trim()) {
+      const h = document.createElement('h3');
+      h.textContent = control.textContent.trim();
+      titleCell = [h];
     }
 
-    // Answer: the panel content body (preserve paragraphs, lists, links).
-    // Cell 2 maps to the "text" richtext field of accordion-faq-item.
+    // Answer: the panel content body (preserve paragraphs, lists, links)
     const content = panel.querySelector('.-oneX-panel-content, [class*="panel-content"]');
     let contentCell = '';
     if (content) {
       const nodes = Array.from(content.children).filter((c) => c.textContent.trim() || c.querySelector('img'));
-      if (nodes.length) {
-        const cell = document.createDocumentFragment();
-        cell.appendChild(document.createComment(' field:text '));
-        nodes.forEach((n) => cell.appendChild(n));
-        contentCell = cell;
-      }
+      if (nodes.length) contentCell = nodes;
     }
 
     if (titleCell || contentCell) {

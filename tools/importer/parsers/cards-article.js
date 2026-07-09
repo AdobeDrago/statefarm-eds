@@ -56,32 +56,18 @@ export default function parse(element, { document }) {
         || Array.from(card.querySelectorAll('a')).find((a) => !a.querySelector('img'));
     }
 
+    const textCell = [];
+    if (titleLink) textCell.push(titleLink);
     // Optional description paragraph (product pages) — only for non-anchor cards.
     const desc = card.tagName === 'A' ? null : card.querySelector('p');
+    if (desc) textCell.push(desc);
 
-    // Cell 1 maps to the "image" reference field (imageAlt collapses into the
-    // <img> alt attribute, so no hint for it). Cell 2 maps to the "text"
-    // richtext field (title link + optional description).
-    let imageCell = '';
-    if (image) {
-      const cell = document.createDocumentFragment();
-      cell.appendChild(document.createComment(' field:image '));
-      cell.appendChild(image);
-      imageCell = cell;
-    }
-
-    let textCell = '';
-    if (titleLink || desc) {
-      const cell = document.createDocumentFragment();
-      cell.appendChild(document.createComment(' field:text '));
-      if (titleLink) cell.appendChild(titleLink);
-      if (desc) cell.appendChild(desc);
-      textCell = cell;
-    }
-
-    if (imageCell || textCell) {
+    if (image || textCell.length) {
       // 2-column card row: image | text (pad empties to keep column count equal)
-      cells.push([imageCell, textCell]);
+      cells.push([
+        image ? [image] : '',
+        textCell.length ? textCell : '',
+      ]);
     }
   });
 

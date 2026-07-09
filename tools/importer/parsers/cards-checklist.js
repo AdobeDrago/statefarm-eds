@@ -30,21 +30,17 @@ export default function parse(element, { document }) {
 
   const cells = [];
   cards.forEach((card) => {
-    // Single "text" richtext field — emit a field hint before the content so
-    // migrated content maps to the cards-checklist-item model in UE.
-    const cell = document.createDocumentFragment();
-    cell.appendChild(document.createComment(' field:text '));
-    let hasContent = false;
+    const cardContent = [];
     const heading = card.querySelector(':scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
-    if (heading) { cell.appendChild(heading); hasContent = true; }
+    if (heading) cardContent.push(heading);
     const list = card.querySelector(':scope > ul');
-    if (list) { cell.appendChild(list); hasContent = true; }
+    if (list) cardContent.push(list);
     // Optional footnote paragraph within the card
     const footnote = card.querySelector(':scope > p');
-    if (footnote) { cell.appendChild(footnote); hasContent = true; }
-    if (hasContent) {
+    if (footnote) cardContent.push(footnote);
+    if (cardContent.length) {
       // 1-column card row: single cell holding heading + list
-      cells.push([cell]);
+      cells.push([cardContent]);
     }
   });
 

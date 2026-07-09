@@ -121,20 +121,14 @@ var CustomImportScript = (() => {
     }
     const cells = [];
     items.forEach((item) => {
+      const cardContent = [];
       const heading = item.querySelector('h3, h4, h5, h6, [class*="title"]');
-      const cell = document.createDocumentFragment();
-      cell.appendChild(document.createComment(" field:text "));
-      let hasContent = false;
-      if (heading) {
-        cell.appendChild(heading);
-        hasContent = true;
-      }
-      Array.from(item.querySelectorAll(":scope > p, p")).forEach((p) => {
-        cell.appendChild(p);
-        hasContent = true;
+      if (heading) cardContent.push(heading);
+      item.querySelectorAll(":scope > p, p").forEach((p) => {
+        if (!cardContent.includes(p)) cardContent.push(p);
       });
-      if (hasContent) {
-        cells.push([cell]);
+      if (cardContent.length) {
+        cells.push([cardContent]);
       }
     });
     if (cells.length === 0) {
@@ -199,24 +193,15 @@ var CustomImportScript = (() => {
       } else {
         titleLink = card.querySelector('a[class*="link--block"], a[class*="link-secondary"]') || Array.from(card.querySelectorAll("a")).find((a) => !a.querySelector("img"));
       }
+      const textCell = [];
+      if (titleLink) textCell.push(titleLink);
       const desc = card.tagName === "A" ? null : card.querySelector("p");
-      let imageCell = "";
-      if (image) {
-        const cell = document.createDocumentFragment();
-        cell.appendChild(document.createComment(" field:image "));
-        cell.appendChild(image);
-        imageCell = cell;
-      }
-      let textCell = "";
-      if (titleLink || desc) {
-        const cell = document.createDocumentFragment();
-        cell.appendChild(document.createComment(" field:text "));
-        if (titleLink) cell.appendChild(titleLink);
-        if (desc) cell.appendChild(desc);
-        textCell = cell;
-      }
-      if (imageCell || textCell) {
-        cells.push([imageCell, textCell]);
+      if (desc) textCell.push(desc);
+      if (image || textCell.length) {
+        cells.push([
+          image ? [image] : "",
+          textCell.length ? textCell : ""
+        ]);
       }
     });
     if (cells.length === 0) {

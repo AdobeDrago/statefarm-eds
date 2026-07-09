@@ -29,21 +29,16 @@ export default function parse(element, { document }) {
 
   const cells = [];
   items.forEach((item) => {
+    const cardContent = [];
     const heading = item.querySelector('h3, h4, h5, h6, [class*="title"]');
-    // Single "text" richtext field — emit a field hint before the content so
-    // the migrated content maps to the cards-coverage-item model in UE.
-    const cell = document.createDocumentFragment();
-    cell.appendChild(document.createComment(' field:text '));
-    let hasContent = false;
-    if (heading) { cell.appendChild(heading); hasContent = true; }
+    if (heading) cardContent.push(heading);
     // Description paragraph(s) — preserve the linked coverage phrase
-    Array.from(item.querySelectorAll(':scope > p, p')).forEach((p) => {
-      cell.appendChild(p);
-      hasContent = true;
+    item.querySelectorAll(':scope > p, p').forEach((p) => {
+      if (!cardContent.includes(p)) cardContent.push(p);
     });
-    if (hasContent) {
+    if (cardContent.length) {
       // 1-column card row: one cell holding all card content
-      cells.push([cell]);
+      cells.push([cardContent]);
     }
   });
 

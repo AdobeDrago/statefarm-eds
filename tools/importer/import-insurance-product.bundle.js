@@ -190,20 +190,14 @@ var CustomImportScript = (() => {
     }
     const cells = [];
     items.forEach((item) => {
+      const cardContent = [];
       const heading = item.querySelector('h3, h4, h5, h6, [class*="title"]');
-      const cell = document.createDocumentFragment();
-      cell.appendChild(document.createComment(" field:text "));
-      let hasContent = false;
-      if (heading) {
-        cell.appendChild(heading);
-        hasContent = true;
-      }
-      Array.from(item.querySelectorAll(":scope > p, p")).forEach((p) => {
-        cell.appendChild(p);
-        hasContent = true;
+      if (heading) cardContent.push(heading);
+      item.querySelectorAll(":scope > p, p").forEach((p) => {
+        if (!cardContent.includes(p)) cardContent.push(p);
       });
-      if (hasContent) {
-        cells.push([cell]);
+      if (cardContent.length) {
+        cells.push([cardContent]);
       }
     });
     if (cells.length === 0) {
@@ -224,26 +218,15 @@ var CustomImportScript = (() => {
     }
     const cells = [];
     cards.forEach((card) => {
-      const cell = document.createDocumentFragment();
-      cell.appendChild(document.createComment(" field:text "));
-      let hasContent = false;
+      const cardContent = [];
       const heading = card.querySelector(":scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6");
-      if (heading) {
-        cell.appendChild(heading);
-        hasContent = true;
-      }
+      if (heading) cardContent.push(heading);
       const list = card.querySelector(":scope > ul");
-      if (list) {
-        cell.appendChild(list);
-        hasContent = true;
-      }
+      if (list) cardContent.push(list);
       const footnote = card.querySelector(":scope > p");
-      if (footnote) {
-        cell.appendChild(footnote);
-        hasContent = true;
-      }
-      if (hasContent) {
-        cells.push([cell]);
+      if (footnote) cardContent.push(footnote);
+      if (cardContent.length) {
+        cells.push([cardContent]);
       }
     });
     if (cells.length === 0) {
@@ -266,25 +249,20 @@ var CustomImportScript = (() => {
       const control = panel.querySelector('.-oneX-panel-control, [role="heading"], [class*="panel-control"]');
       let titleEl = panel.querySelector('.-oneX-panel-button, button, [class*="panel-button"]');
       let titleCell = "";
-      const titleText = titleEl && titleEl.textContent.trim() || control && control.textContent.trim() || "";
-      if (titleText) {
-        const cell = document.createDocumentFragment();
-        cell.appendChild(document.createComment(" field:summary "));
+      if (titleEl && titleEl.textContent.trim()) {
         const h = document.createElement("h3");
-        h.textContent = titleText;
-        cell.appendChild(h);
-        titleCell = cell;
+        h.textContent = titleEl.textContent.trim();
+        titleCell = [h];
+      } else if (control && control.textContent.trim()) {
+        const h = document.createElement("h3");
+        h.textContent = control.textContent.trim();
+        titleCell = [h];
       }
       const content = panel.querySelector('.-oneX-panel-content, [class*="panel-content"]');
       let contentCell = "";
       if (content) {
         const nodes = Array.from(content.children).filter((c) => c.textContent.trim() || c.querySelector("img"));
-        if (nodes.length) {
-          const cell = document.createDocumentFragment();
-          cell.appendChild(document.createComment(" field:text "));
-          nodes.forEach((n) => cell.appendChild(n));
-          contentCell = cell;
-        }
+        if (nodes.length) contentCell = nodes;
       }
       if (titleCell || contentCell) {
         cells.push([titleCell || "", contentCell || ""]);
@@ -322,24 +300,15 @@ var CustomImportScript = (() => {
       } else {
         titleLink = card.querySelector('a[class*="link--block"], a[class*="link-secondary"]') || Array.from(card.querySelectorAll("a")).find((a) => !a.querySelector("img"));
       }
+      const textCell = [];
+      if (titleLink) textCell.push(titleLink);
       const desc = card.tagName === "A" ? null : card.querySelector("p");
-      let imageCell = "";
-      if (image) {
-        const cell = document.createDocumentFragment();
-        cell.appendChild(document.createComment(" field:image "));
-        cell.appendChild(image);
-        imageCell = cell;
-      }
-      let textCell = "";
-      if (titleLink || desc) {
-        const cell = document.createDocumentFragment();
-        cell.appendChild(document.createComment(" field:text "));
-        if (titleLink) cell.appendChild(titleLink);
-        if (desc) cell.appendChild(desc);
-        textCell = cell;
-      }
-      if (imageCell || textCell) {
-        cells.push([imageCell, textCell]);
+      if (desc) textCell.push(desc);
+      if (image || textCell.length) {
+        cells.push([
+          image ? [image] : "",
+          textCell.length ? textCell : ""
+        ]);
       }
     });
     if (cells.length === 0) {
