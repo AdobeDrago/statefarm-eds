@@ -28,7 +28,7 @@
   font-weight: 500;
   line-height: 31px;
   color: #fff;
-  margin: 48px 0 8px; /* sm top margin; grows to 64px at desktop */
+  margin: 0 0 8px;
 }
 
 .columns-agent-cta p {
@@ -113,38 +113,46 @@ main .columns-agent-cta a.button:any-link:focus,
 
 /* --- Desktop: two-column layout, photo revealed and bottom-aligned --- */
 @media (width >= 900px) {
+  .columns-agent-cta {
+    height: 307px; /* match original — image natural height drives the block */
+  }
+
   .columns-agent-cta > div {
     flex-direction: row;
-    align-items: flex-end; /* photo flush to bottom of red panel */
+    align-items: stretch;
     justify-content: space-between;
-    gap: 24px;
+    height: 100%;
   }
 
   .columns-agent-cta > div > div {
     flex: 1 1 50%;
     max-width: 50%;
     padding: 0 15px 0 48px;
-    align-self: center; /* vertically center text in left column */
+    align-self: center;
   }
 
   .columns-agent-cta h3 {
-    margin-top: 64px;
+    margin-top: 0;
   }
 
   .columns-agent-cta .columns-agent-cta-img-col {
-    display: block;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
     flex: 1 1 50%;
     max-width: 50%;
-    overflow: hidden; /* clip zoomed photo */
-    align-self: stretch; /* fill the full panel height so cover fills it */
+    overflow: hidden;
   }
 
   .columns-agent-cta .columns-agent-cta-img-col picture {
-    display: block;
+    display: flex;
+    align-items: flex-end;
     height: 100%;
   }
 
   .columns-agent-cta .columns-agent-cta-img-col img {
-    height: 100%;
+    height: 307px;
+    width: auto;
+    object-fit: unset;
   }
 }

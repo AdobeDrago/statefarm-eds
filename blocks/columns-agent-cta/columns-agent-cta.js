@@ -32,7 +32,7 @@ export default function decorate(block) {
         const form = document.createElement('form');
         form.classList.add('columns-agent-cta-form');
         form.innerHTML = `
-          <input type="text" name="zip" placeholder="Enter ZIP code" class="columns-agent-cta-zip" maxlength="10" autocomplete="postal-code">
+          <input type="text" name="zip" placeholder="ZIP Code" class="columns-agent-cta-zip" maxlength="10" autocomplete="postal-code">
           <button type="submit" class="columns-agent-cta-submit">Find an agent</button>
         `;
         if (lastP) {
