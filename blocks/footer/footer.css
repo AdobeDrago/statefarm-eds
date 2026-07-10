@@ -1,21 +1,21 @@
-/* State Farm footer — dark banner + white content columns, matches source */
+/* State Farm footer */
 
 footer .footer-inner {
   font-family: var(--body-font-family);
   color: var(--text-color, #212121);
+  background-color: rgb(247, 240, 228);
 }
 
 /* "Like a good neighbor" banner */
 footer .footer-banner {
   background-color: var(--brand-red, #d62311);
   color: #fff;
-  text-align: center;
-  padding: 20px 16px;
+  padding: 20px max(16px, calc((100% - var(--content-max-width, 1200px)) / 2 + 15px));
 }
 
 footer .footer-banner p {
   margin: 0;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -38,8 +38,8 @@ footer .footer-brand img {
 
 footer .footer-brand p {
   margin: 0;
-  font-size: 14px;
-  color: #555;
+  font-size: 16px;
+  color: #212121;
   max-width: 320px;
 }
 
