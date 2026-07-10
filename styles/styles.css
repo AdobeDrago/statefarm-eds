@@ -177,6 +177,14 @@ main .section.accent h6 {
   color: #fff;
 }
 
+/* Legal disclaimer — small print at bottom of page */
+main .section.legal p {
+  font-size: 12px;
+  line-height: 16px;
+  color: #212121;
+  margin-bottom: 8px;
+}
+
 @media (width >= 900px) {
   main .section {
     padding: 48px 32px;
