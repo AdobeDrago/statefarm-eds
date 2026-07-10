@@ -209,6 +209,7 @@
 }
 
 .hero-quote-submit {
+  margin: 0;
   height: 48px;
   padding: 0 32px;
   background: rgb(214, 35, 17);
