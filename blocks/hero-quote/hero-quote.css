@@ -240,29 +240,50 @@
   }
 }
 
-/* Desktop — two-column masthead: text left (~40%), image right (~60%).
-   Source: ~40/60 columns inside 1140px container, h1 48px, intro 19px. */
+/* Desktop — full-width hero: text left aligned to content boundary, image bleeds right */
 @media (width >= 900px) {
   .hero-quote {
     flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-wrap: nowrap;
+    align-items: stretch;
     gap: 0;
-    padding: 40px 15px 48px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
+  /* Text column: left edge at content boundary, right gap before image */
   .hero-quote > div:last-child {
     order: 1;
-    flex: 0 0 42%;
-    max-width: 42%;
-    padding-right: 30px;
+    flex: 0 0 calc(max(0px, (100vw - 1200px) / 2) + 504px);
+    max-width: none;
+    padding: 40px 30px 48px max(16px, calc((100vw - 1200px) / 2 + 16px));
     box-sizing: border-box;
   }
 
+  /* Image column: fills remaining space, overflows to right viewport edge */
   .hero-quote > div:first-child {
     order: 2;
-    flex: 0 0 58%;
-    max-width: 58%;
+    flex: 1 1 auto;
+    max-width: none;
+    overflow: hidden;
+  }
+
+  /* Lifestyle image: fill full column height, maintain aspect ratio via cover */
+  .hero-quote.lifestyle > div:first-child > div {
+    height: 100%;
+  }
+
+  .hero-quote.lifestyle > div:first-child picture {
+    height: 100%;
+  }
+
+  .hero-quote.lifestyle > div:first-child img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset;
+    object-fit: cover;
+    border-radius: 0;
   }
 
   .hero-quote h1 {

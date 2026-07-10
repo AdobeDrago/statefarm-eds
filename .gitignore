@@ -16,3 +16,7 @@ helix-importer-ui
 migration-work/
 .migration/
 tools/importer/*.bundle.js
+
+# Debug screenshots from dev sessions
+/*.png
+.playwright-mcp/

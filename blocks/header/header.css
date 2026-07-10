@@ -6,10 +6,6 @@ header .header {
   border-bottom: 1px solid #e4e3e3;
 }
 
-/* When search is open, allow header placeholder to grow */
-body:has(.header.search-open) header {
-  height: auto;
-}
 
 /* ===== Utility bar (grey strip above main nav) ===== */
 /*
@@ -32,14 +28,8 @@ header .header .nav-utility-bar {
   box-sizing: border-box;
   font-size: 13px;
   font-family: var(--body-font-family);
-  transition: opacity 0.2s ease-out;
 }
 
-/* Utility bar fades out but keeps 32px space so pane rolls in from below the grey area */
-header .header.search-open .nav-utility-bar {
-  opacity: 0;
-  pointer-events: none;
-}
 
 header .header .nav-utility-bar ul {
   list-style: none;
@@ -97,14 +87,15 @@ header .header .nav-search-pane.is-open {
   border-bottom: 1px solid #e4e3e3;
 }
 
-/* Search form — sole grid item; min-height:0 lets grid row collapse to 0 */
+/* Search form — sole grid item; min-height:0 + no explicit height lets 0fr track collapse */
 header .header .nav-search-form {
   min-height: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 16px;
   max-width: 700px;
-  height: 88px;
+  padding: 20px 0;
 }
 
 /* Floating label input field — bottom-line style matching original */

@@ -13,7 +13,7 @@
   --body-font-size-s: 14px;
   --body-font-size-xs: 12px;
 
-  --nav-height: 65px;
+  --nav-height: 97px; /* 32px utility bar + 65px main nav */
 }
 
 /* fallback fonts to reduce CLS while brand font loads */
@@ -39,7 +39,7 @@ body.appear {
 }
 
 header {
-  height: var(--nav-height);
+  min-height: var(--nav-height);
 }
 
 /* Headings */
