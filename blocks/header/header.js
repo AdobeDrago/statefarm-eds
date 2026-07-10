@@ -34,12 +34,14 @@ export default async function decorate(block) {
   searchPane.setAttribute('role', 'search');
   searchPane.innerHTML = `
     <form class="nav-search-form" action="/search" method="get">
-      <div class="nav-search-field">
-        <input type="search" name="q" id="nav-search-input" class="nav-search-input"
-               placeholder=" " autocomplete="off" aria-labelledby="nav-search-label">
-        <label id="nav-search-label" for="nav-search-input" class="nav-search-label">How can we help you?</label>
+      <div class="nav-search-inner">
+        <div class="nav-search-field">
+          <input type="search" name="q" id="nav-search-input" class="nav-search-input"
+                 placeholder=" " autocomplete="off" aria-labelledby="nav-search-label">
+          <label id="nav-search-label" for="nav-search-input" class="nav-search-label">How can we help you?</label>
+        </div>
+        <button type="submit" class="nav-search-submit">Search</button>
       </div>
-      <button type="submit" class="nav-search-submit">Search</button>
     </form>
     <button type="button" class="nav-search-close" aria-label="Close search">&times;</button>
   `;
