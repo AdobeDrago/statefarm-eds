@@ -12,7 +12,12 @@
  *   .hero-quote > div:last-child   > div   -> text cell (h1 + intro p)
  */
 
-/* Full-width: neutralize the EDS section max-width wrapper for this block */
+/* Full-width: neutralize EDS section padding so image bleeds to viewport edge */
+.hero-quote-container {
+  padding: 0;
+  overflow: visible;
+}
+
 .hero-quote-container .hero-quote-wrapper {
   max-width: unset;
   padding: 0;
