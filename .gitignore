@@ -20,3 +20,4 @@ tools/importer/*.bundle.js
 # Debug screenshots from dev sessions
 /*.png
 .playwright-mcp/
+.claude-plugin/
