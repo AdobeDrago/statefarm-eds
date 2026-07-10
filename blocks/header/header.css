@@ -153,6 +153,7 @@ header .header .nav-search-input:focus ~ .nav-search-label {
 
 /* Search submit button — exact original: 48px, red pill, padding 0 48px */
 header .header .nav-search-submit {
+  margin: 0;
   height: 48px;
   padding: 0 48px;
   background-color: rgb(214, 35, 17);
